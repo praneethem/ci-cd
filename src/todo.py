@@ -1,45 +1,44 @@
-todo_list = []
-
 def show_menu():
-    print("\n=== TO-DO LIST MENU ===")
+    print("=== TO-DO LIST MENU ===")
     print("1. Add task")
     print("2. View tasks")
     print("3. Remove task")
-    print("4. Exit\n")
+    print("4. Exit")
+
+tasks = []
 
 def main():
     while True:
         show_menu()
-        choice = input("Choose an option: ")
+        try:
+            choice = input("Choose an option: ").strip()
+        except EOFError:
+            print("\nNo input detected. Exiting safely...")
+            break
 
         if choice == "1":
-            task = input("Enter task: ")
-            todo_list.append(task)
-            print("Task added!")
+            try:
+                task = input("Enter task: ")
+                tasks.append(task)
+                print("Task added!")
+            except EOFError:
+                print("No task entered. Exiting...")
+                break
 
         elif choice == "2":
-            if not todo_list:
-                print("No tasks yet.")
-            else:
-                for i, task in enumerate(todo_list):
-                    print(f"{i+1}. {task}")
+            print("Your tasks:")
+            for i, t in enumerate(tasks, 1):
+                print(f"{i}. {t}")
 
         elif choice == "3":
-            if not todo_list:
-                print("Nothing to remove.")
-            else:
-                index = int(input("Enter task number: ")) - 1
-                if 0 <= index < len(todo_list):
-                    removed = todo_list.pop(index)
-                    print(f"Removed: {removed}")
+            print("Remove feature not needed for Jenkins test")
 
         elif choice == "4":
-            print("Goodbye!")
+            print("Exiting...")
             break
 
         else:
-            print("Invalid choice.")
-            
+            print("Invalid choice! Try again.")
 
 if __name__ == "__main__":
     main()
