@@ -11,13 +11,12 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo "No build needed for Python CLI app"
+                echo "No build step needed for Python CLI app"
             }
         }
 
         stage('Test') {
             steps {
-                // Test the To-Do app by automatically sending "4" (Exit)
                 sh 'echo 4 | python3 src/todo.py'
             }
         }
@@ -30,7 +29,6 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                // Automatically send input to avoid EOFError
                 sh 'echo 4 | docker run --rm praneethem/todo-cli:latest'
             }
         }
